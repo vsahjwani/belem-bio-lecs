@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BIBC 102 drills: Lec 1</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E8ECF0; --surface:#FFFFFF; --ink:#172033; --muted:#5A6577; --line:#CBD3DC;
+  --rpink:#F6C3CA; --good:#11795A; --good-bg:#DDF2EA; --bad:#C2293A; --bad-bg:#FBE3E5;
+  --np:#5F6F86; --pu:#0E8587; --pos:#2C59D4; --neg:#D0423C; --aro:#8448CC; --focus:#2C59D4;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,-apple-system,sans-serif;
+  --body:'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --chem:'Source Serif 4','Times New Roman',Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#10151E; --surface:#1A2130; --ink:#E7EBF2; --muted:#9BA6B9; --line:#2D3648;
+    --rpink:#5C2834; --good:#3FCB98; --good-bg:#12382A; --bad:#FF6B78; --bad-bg:#3D1A21;
+    --np:#9AA8BD; --pu:#3CC3C4; --pos:#7EA0FF; --neg:#FF7A72; --aro:#C29BFF; --focus:#7EA0FF;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 var(--body);
+  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:780px;margin:0 auto;padding:28px 20px 64px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:.875rem}
+kbd{font-family:var(--body);font-size:.75rem;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;color:var(--muted);background:var(--surface)}
+
+/* ---------- home ---------- */
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:28px}
+.title{font-size:clamp(2.2rem,7vw,3.4rem);font-weight:800;letter-spacing:-.025em}
+.title span{display:block;font-size:.42em;font-weight:500;letter-spacing:0;color:var(--muted);margin-top:8px}
+.sync{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.85rem;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.dot.on{background:var(--good)}
+.doors{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:700px){.doors{grid-template-columns:1.15fr 1fr}}
+.door{color:inherit;text-decoration:none;display:flex;flex-direction:column;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:24px;padding:22px;gap:14px;transition:border-color .15s}
+.door:hover{border-color:var(--ink)}
+.door h2{font-size:1.75rem;font-weight:800;letter-spacing:-.015em}
+.door .mol-wrap{display:flex;justify-content:center;padding:6px 0 0}
+
+.door-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto}
+.strip{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;flex:1}
+.strip i{height:10px;border-radius:2px;background:var(--line);position:relative;overflow:hidden}
+.strip i b{position:absolute;inset:0;background:var(--c);opacity:var(--o)}
+.topics{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.topics li{display:grid;grid-template-columns:1fr 70px;align-items:center;gap:10px;font-size:.95rem}
+.meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.meter b{display:block;height:100%;background:var(--ink)}
+.sect{margin-top:36px}
+.sect h3{font-size:1.25rem;font-weight:700;margin-bottom:12px}
+.weak{list-style:none;margin:0 0 14px;padding:0;border-top:1px solid var(--line)}
+.weak li{display:flex;justify-content:space-between;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line)}
+.weak .w-item{font-weight:700}
+.empty{border:1.5px dashed var(--line);border-radius:14px;padding:16px;color:var(--muted)}
+
+/* ---------- buttons ---------- */
+.btn{border:0;border-radius:999px;padding:12px 22px;font-family:var(--display);font-weight:700;font-size:1rem;background:var(--ink);color:var(--surface)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn.good{background:var(--good);color:#fff}
+.btn.bad{background:var(--bad);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.linkish{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- setup ---------- */
+.back{background:none;border:0;padding:6px 0;color:var(--muted);font-size:.95rem;margin-bottom:18px}
+.back:hover{color:var(--ink)}
+.setup h2{font-size:2.2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.field{margin-top:26px}
+.field>label,.field>.lab{display:block;font-weight:700;margin-bottom:10px}
+.modes{display:grid;gap:10px}
+.mode{display:grid;grid-template-columns:22px 1fr;gap:12px;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px}
+.mode[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.mode .radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);margin-top:3px}
+.mode[aria-pressed="true"] .radio{border:6px solid var(--ink)}
+.mode strong{font-family:var(--display);font-size:1.08rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:.95rem}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.chip .sw{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:7px}
+
+/* ---------- game ---------- */
+.bar{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.x{background:none;border:1.5px solid var(--line);border-radius:50%;width:38px;height:38px;flex:none;font-size:1.1rem;line-height:1}
+.track{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.track b{display:block;height:100%;background:var(--ink);transition:width .3s}
+.streak{font-family:var(--display);font-weight:700;min-width:54px;text-align:right}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:24px;padding:24px}
+.qlabel{color:var(--muted);font-size:.95rem;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px}
+.qtext{font-family:var(--display);font-size:clamp(1.3rem,4vw,1.65rem);font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.bigterm{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,11vw,4.2rem);letter-spacing:-.02em;text-align:center;padding:18px 0 6px}
+.bigterm.code{font-family:var(--chem);font-weight:600}
+.molbox{display:flex;justify-content:center;padding:4px 0 8px}
+.opts{display:grid;gap:10px;margin-top:20px}
+.opt{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:baseline;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 15px}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt .k{color:var(--muted);font-size:.8rem}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--good-bg);border-color:var(--good)}
+.opt.wrong{background:var(--bad-bg);border-color:var(--bad)}
+.opt.dim{opacity:.55}
+.opts.structs{grid-template-columns:1fr 1fr}
+.opts.structs .opt{grid-template-columns:1fr;justify-items:center;padding:10px 6px;position:relative}
+.opts.structs .opt .k{position:absolute;top:8px;left:10px}
+.opts.cats .opt .sw{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);margin-right:8px}
+.answer-in{display:flex;gap:10px;margin-top:20px;align-items:center;justify-content:center;flex-wrap:wrap}
+.answer-in input{border:2px solid var(--line);background:var(--bg);border-radius:14px;padding:10px 14px;font-family:var(--display);font-weight:700;text-align:center}
+.answer-in input.letter{width:84px;font-size:2.4rem;font-family:var(--chem);text-transform:uppercase}
+.answer-in input.word{width:min(100%,320px);font-size:1.4rem}
+.answer-in input:focus{border-color:var(--ink);outline:none}
+.answer-in input.right{border-color:var(--good);background:var(--good-bg)}
+.answer-in input.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.fb{margin-top:20px;border-left:4px solid var(--line);padding:4px 0 4px 16px}
+.fb.good{border-color:var(--good)}
+.fb.bad{border-color:var(--bad)}
+.fb h4{font-family:var(--display);font-size:1.15rem;margin:0 0 6px}
+.fb.good h4{color:var(--good)}
+.fb.bad h4{color:var(--bad)}
+.fb p+p{margin-top:6px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px 16px;margin:10px 0 12px}
+.facts dt{font-size:.8rem;color:var(--muted)}
+.facts dd{margin:0;font-weight:700}
+.catpill{display:inline-flex;align-items:center;gap:6px}
+.catpill::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+.reveal{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
+.misschips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.misschips .chip:disabled{cursor:default}
+.misschips .chip[aria-pressed="true"]{background:var(--bad);border-color:var(--bad);color:#fff}
+.answerbox{font-size:1.05rem;line-height:1.55}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+.streak.pop{animation:pop .35s ease}
+
+/* ---------- summary ---------- */
+.score{font-family:var(--display);font-weight:800;font-size:clamp(3rem,13vw,5.5rem);letter-spacing:-.03em;line-height:1}
+.score small{font-size:.35em;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:8px}
+
+/* ---------- study sheet ---------- */
+.catgroup{margin-top:26px}
+.catgroup h3{font-size:1.15rem;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.catgroup h3::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--c)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.tile{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:10px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+
+.tile .nm{font-family:var(--display);font-weight:700}
+.tile .cd{font-family:var(--chem);color:var(--muted)}
+.tile.covered .nm,.tile.covered .cd{filter:blur(7px);user-select:none}
+.toggle{display:inline-flex;align-items:center;gap:10px}
+
+/* ---------- molecule ---------- */
+.mol{width:100%;height:auto;color:var(--ink);display:block}
+.mol text{font-family:var(--chem);font-size:15px;fill:currentColor}
+.mol line{stroke:currentColor;stroke-width:1.35;stroke-linecap:round}
+.mol .rbox{fill:var(--rpink)}
+
+/* ---------- dialog ---------- */
+dialog{border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink);padding:24px;max-width:560px;width:calc(100% - 32px)}
+dialog::backdrop{background:rgba(10,15,25,.45)}
+dialog h2{font-size:1.5rem;margin-bottom:8px}
+dialog input[type=url]{width:100%;border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:10px 12px;margin:10px 0}
+dialog ol{padding-left:20px;margin:10px 0}
+.status{min-height:1.5em;margin-top:8px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+
+<dialog id="settings" aria-labelledby="set-h">
+  <h2 id="set-h">Google Sheet logging</h2>
+  <p class="muted small">Every answer gets written to your sheet: time, item, question, your answer, and right or wrong. Paste the web app URL from Apps Script (it ends in <code>/exec</code>).</p>
+  <input type="url" id="endpoint" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off">
+  <div class="row">
+    <button class="btn" id="saveEndpoint">Save and send a test row</button>
+    <button class="btn ghost" id="closeSettings">Close</button>
+  </div>
+  <p class="status small" id="setStatus" aria-live="polite"></p>
+  <details class="small" style="margin-top:14px">
+    <summary>Reset progress on this device</summary>
+    <p class="muted" style="margin:8px 0">Clears mastery levels and local history. Your sheet is untouched.</p>
+    <button class="btn bad" id="resetAll">Reset progress</button>
+  </details>
+</dialog>
+
+<script>
+'use strict';
+/* ============================================================
+   CONFIG — paste your Apps Script web app URL here so logging
+   works on every device (phone, laptop) without setup.
+   ============================================================ */
+const DEFAULT_ENDPOINT = '';
+
+/* ---------------- storage ---------------- */
+const NS = 'bibc102.lec1.';
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(NS+k); return v == null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(NS+k, JSON.stringify(v)); }catch(e){} }
+};
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const $ = s => document.querySelector(s);
+
+/* ---------------- amino acid data ---------------- */
+const CATS = {
+  np:  {name:'Nonpolar, aliphatic', color:'var(--np)'},
+  pu:  {name:'Polar, uncharged',    color:'var(--pu)'},
+  pos: {name:'Positively charged',  color:'var(--pos)'},
+  neg: {name:'Negatively charged',  color:'var(--neg)'},
+  aro: {name:'Aromatic',            color:'var(--aro)'}
+};
+const CAT_ORDER = ['np','pu','pos','neg','aro'];
+
+// R-group drawings. Atom = [x, y, label]; bond = [from, to, order, ringCx, ringCy]; index -1 = alpha carbon.
+const AA = [
+ {name:'Glycine', three:'Gly', one:'G', cat:'np', conf:'ASP', lconf:'AQ',
+  r:{a:[[100,112,'H']], b:[[-1,0,1]]},
+  look:'R group is a single H. Smallest amino acid, and the only one that isn\'t chiral.',
+  code:'G for glycine.'},
+ {name:'Alanine', three:'Ala', one:'A', cat:'np', conf:'GVS', lconf:'RN',
+  r:{a:[[100,112,'CH3']], b:[[-1,0,1]]},
+  look:'R group is one methyl (CH₃).',
+  code:'A for alanine.'},
+ {name:'Valine', three:'Val', one:'V', cat:'np', conf:'LIAT', lconf:'W',
+  r:{a:[[100,112,'CH'],[64,146,'CH3'],[136,146,'CH3']], b:[[-1,0,1],[0,1,1],[0,2,1]]},
+  look:'Forks into two CH₃s right at the first carbon, like a V.',
+  code:'V for valine.'},
+ {name:'Leucine', three:'Leu', one:'L', cat:'np', conf:'IVM', lconf:'KI',
+  r:{a:[[100,112,'CH2'],[100,150,'CH'],[64,184,'CH3'],[136,184,'CH3']], b:[[-1,0,1],[0,1,1],[1,2,1],[1,3,1]]},
+  look:'One CH₂ first, then the fork. Leucine\'s fork sits one carbon lower than valine\'s.',
+  code:'L for leucine.'},
+ {name:'Isoleucine', three:'Ile', one:'I', cat:'np', conf:'LVT', lconf:'L',
+  r:{a:[[100,112,'CH'],[152,112,'CH3'],[100,150,'CH2'],[100,188,'CH3']], b:[[-1,0,1],[0,1,1],[0,2,1],[2,3,1]]},
+  look:'Branches at the first carbon: a CH₃ off to the side and a CH₂–CH₃ tail going down.',
+  code:'I for isoleucine. Watch the three-letter: Ile, not Iso.'},
+ {name:'Methionine', three:'Met', one:'M', cat:'np', conf:'CLK', lconf:'N',
+  r:{a:[[100,112,'CH2'],[100,150,'CH2'],[100,188,'S'],[100,226,'CH3']], b:[[-1,0,1],[0,1,1],[1,2,1],[2,3,1]]},
+  look:'Straight chain with a sulfur in the middle: CH₂–CH₂–S–CH₃.',
+  code:'M for methionine, the start-codon amino acid.'},
+ {name:'Proline', three:'Pro', one:'P', cat:'np', conf:'VGH', lconf:'F',
+  full:{atoms:[[100,26,'COO-'],[100,70,'C'],[50,70,'H2N+'],[148,70,'H'],[112,116,'CH2'],[72,142,'CH2'],[36,112,'CH2']],
+        bonds:[[0,1,1],[2,1,1],[1,3,1],[1,4,1],[4,5,1],[5,6,1],[6,2,1]], rIdx:[4,5,6]},
+  look:'The side chain loops back and bonds to the backbone nitrogen, making a ring.',
+  code:'P for proline. Lehninger files it as nonpolar aliphatic; on the slide it sits in its own little box.'},
+ {name:'Serine', three:'Ser', one:'S', cat:'pu', conf:'TCA', lconf:'C',
+  r:{a:[[100,112,'CH2OH']], b:[[-1,0,1]]},
+  look:'CH₂OH: alanine with an OH stuck on.',
+  code:'S for serine.'},
+ {name:'Threonine', three:'Thr', one:'T', cat:'pu', conf:'SIV', lconf:'WY',
+  r:{a:[[100,112,'CH'],[148,112,'OH'],[100,150,'CH3']], b:[[-1,0,1],[0,1,1],[0,2,1]]},
+  look:'A CH carrying both an OH and a CH₃. Serine plus a methyl.',
+  code:'T for threonine.'},
+ {name:'Cysteine', three:'Cys', one:'C', cat:'pu', conf:'SMT', lconf:'S',
+  r:{a:[[100,112,'CH2'],[100,150,'SH']], b:[[-1,0,1],[0,1,1]]},
+  look:'CH₂SH, a thiol. Serine with S in place of O.',
+  code:'C for cysteine.'},
+ {name:'Asparagine', three:'Asn', one:'N', cat:'pu', conf:'QDE', lconf:'DA',
+  r:{a:[[100,112,'CH2'],[100,150,'C'],[62,180,'H2N'],[138,180,'O']], b:[[-1,0,1],[0,1,1],[1,2,1],[1,3,2]]},
+  look:'CH₂ then an amide, C(=O)NH₂.',
+  code:'asparagiNe, the amide N. Pair rule: N comes before Q, so Asn is the shorter amide.'},
+ {name:'Glutamine', three:'Gln', one:'Q', cat:'pu', conf:'NED', lconf:'EG',
+  r:{a:[[100,112,'CH2'],[100,150,'CH2'],[100,188,'C'],[62,218,'H2N'],[138,218,'O']], b:[[-1,0,1],[0,1,1],[1,2,1],[2,3,1],[2,4,2]]},
+  look:'CH₂–CH₂ then the amide C(=O)NH₂. One CH₂ longer than asparagine.',
+  code:'Q: say it "Q-tamine" (cute-amine). Three-letter is Gln.'},
+ {name:'Aspartate', three:'Asp', one:'D', cat:'neg', conf:'ENQ', lconf:'NA',
+  alias:['aspartic acid'],
+  r:{a:[[100,112,'CH2'],[100,150,'COO-']], b:[[-1,0,1],[0,1,1]]},
+  look:'CH₂–COO⁻, the short acid.',
+  code:'asparDic acid. D comes before E, so it\'s the shorter acid.'},
+ {name:'Glutamate', three:'Glu', one:'E', cat:'neg', conf:'DQN', lconf:'QG',
+  alias:['glutamic acid'],
+  r:{a:[[100,112,'CH2'],[100,150,'CH2'],[100,188,'COO-']], b:[[-1,0,1],[0,1,1],[1,2,1]]},
+  look:'CH₂–CH₂–COO⁻. One CH₂ longer than aspartate.',
+  code:'gluEtamate. E comes after D, so it\'s one carbon longer.'},
+ {name:'Lysine', three:'Lys', one:'K', cat:'pos', conf:'RHM', lconf:'LY',
+  r:{a:[[100,112,'CH2'],[100,148,'CH2'],[100,184,'CH2'],[100,220,'CH2'],[100,256,'NH3+']], b:[[-1,0,1],[0,1,1],[1,2,1],[2,3,1],[3,4,1]]},
+  look:'Four CH₂s in a row ending in NH₃⁺.',
+  code:'L was taken by leucine, so lysine got K, the letter just before L.'},
+ {name:'Arginine', three:'Arg', one:'R', cat:'pos', conf:'KHQ', lconf:'A',
+  r:{a:[[100,112,'CH2'],[100,148,'CH2'],[100,184,'CH2'],[100,220,'NH'],[100,256,'C'],[152,256,'NH2+'],[100,292,'NH2']],
+     b:[[-1,0,1],[0,1,1],[1,2,1],[2,3,1],[3,4,1],[4,5,2],[4,6,1]]},
+  look:'Three CH₂s, then NH and a guanidinium: a C holding NH₂⁺ and NH₂.',
+  code:'R: say it "R-ginine".'},
+ {name:'Histidine', three:'His', one:'H', cat:'pos', conf:'WKF', lconf:'',
+  r:{a:[[100,112,'CH2'],[100,152,'C'],[130.4,174.1,'NH'],[118.8,209.9,'CH'],[81.2,209.9,'N'],[69.6,174.1,'CH']],
+     b:[[-1,0,1],[0,1,1],[1,2,1],[2,3,1],[3,4,2,100,184],[4,5,1],[5,1,2,100,184]]},
+  look:'CH₂ attached to a five-membered imidazole ring with two nitrogens.',
+  code:'H for histidine.'},
+ {name:'Phenylalanine', three:'Phe', one:'F', cat:'aro', conf:'YWH', lconf:'P',
+  r:{a:[[100,112,'CH2'],[100,148,''],[122.5,161,''],[122.5,187,''],[100,200,''],[77.5,187,''],[77.5,161,'']],
+     b:[[-1,0,1],[0,1,1],[1,2,1],[2,3,2,100,174],[3,4,1],[4,5,2,100,174],[5,6,1],[6,1,2,100,174]]},
+  look:'CH₂ attached to a plain benzene ring.',
+  code:'F: "Fenylalanine" (ph sounds like F).'},
+ {name:'Tyrosine', three:'Tyr', one:'Y', cat:'aro', conf:'FWT', lconf:'T',
+  r:{a:[[100,112,'CH2'],[100,148,''],[122.5,161,''],[122.5,187,''],[100,200,''],[77.5,187,''],[77.5,161,''],[100,236,'OH']],
+     b:[[-1,0,1],[0,1,1],[1,2,1],[2,3,2,100,174],[3,4,1],[4,5,2,100,174],[5,6,1],[6,1,2,100,174],[4,7,1]]},
+  look:'Phenylalanine with an OH on the far end of the ring.',
+  code:'Y: "tYrosine". The OH sticking off the ring is the stem of the Y.'},
+ {name:'Tryptophan', three:'Trp', one:'W', cat:'aro', conf:'FYH', lconf:'T',
+  r:{a:[[100,112,'CH2'],[100,150,'C'],[132.9,150,'CH'],[143.1,181.3,'NH'],[116.5,200.7,''],[89.8,181.3,''],
+        [113,233.5,''],[82.9,246.9,''],[56.2,227.5,''],[59.6,194.7,'']],
+     b:[[-1,0,1],[0,1,1],[1,2,2,116.5,172.7],[2,3,1],[3,4,1],[4,5,2,86.3,214.1],[5,1,1],
+        [4,6,1],[6,7,2,86.3,214.1],[7,8,1],[8,9,2,86.3,214.1],[9,5,1]]},
+  look:'Two fused rings (indole) with an NH. The biggest side chain.',
+  code:'W: a double ring, so double-u. Three-letter is Trp.'}
+];
+const byOne = Object.fromEntries(AA.map((a,i)=>[a.one,i]));
+
+/* ---------------- structure renderer ---------------- */
+function labelW(t){
+  let w = 0;
+  for(const ch of t){
+    if(/\d/.test(ch)) w += 5.6;
+    else if(ch==='+'||ch==='-') w += 6.4;
+    else if(ch==='S') w += 8.6;
+    else w += 10.4;
+  }
+  return w;
+}
+function labelSVG(t, x, y){
+  const groups = [];
+  for(const ch of t){
+    const m = /\d/.test(ch) ? 1 : (ch==='+'||ch==='-') ? 2 : 0;
+    const c = ch==='-' ? '\u2212' : ch;
+    if(groups.length && groups[groups.length-1].m === m) groups[groups.length-1].s += c;
+    else groups.push({m, s:c});
+  }
+  let cur = 0, out = '';
+  for(const g of groups){
+    const off = g.m===1 ? 4 : g.m===2 ? -6 : 0;
+    const fs = g.m ? ' font-size="10.5"' : '';
+    out += `<tspan dy="${off-cur}"${fs}>${g.s}</tspan>`;
+    cur = off;
+  }
+  return `<text x="${x}" y="${y+5}" text-anchor="middle">${out}</text>`;
+}
+function boxDist(lbl, ux, uy){
+  const hw = labelW(lbl)/2 + 3, hh = 10;
+  const tx = Math.abs(ux) < 1e-6 ? Infinity : hw/Math.abs(ux);
+  const ty = Math.abs(uy) < 1e-6 ? Infinity : hh/Math.abs(uy);
+  return Math.min(tx, ty) + 1;
+}
+function molSpec(aa){
+  if(aa.full) return aa.full;
+  const atoms = [[100,26,'COO-'],[100,70,'C'],[46,70,'H3N+'],[148,70,'H']];
+  const bonds = [[0,1,1],[2,1,1],[1,3,1]];
+  const off = atoms.length;
+  aa.r.a.forEach(a => atoms.push(a));
+  aa.r.b.forEach(b => { const m = b.slice(); m[0] = b[0]<0 ? 1 : b[0]+off; m[1] = b[1]<0 ? 1 : b[1]+off; bonds.push(m); });
+  return {atoms, bonds, rIdx: aa.r.a.map((_,i)=>i+off)};
+}
+function drawAA(aa, scale=1.25){
+  const {atoms, bonds, rIdx} = molSpec(aa);
+  let lines = '';
+  for(const [i,j,order,cx,cy] of bonds){
+    const [x1,y1,l1] = atoms[i], [x2,y2,l2] = atoms[j];
+    const L = Math.hypot(x2-x1, y2-y1), ux = (x2-x1)/L, uy = (y2-y1)/L;
+    const s1 = l1 ? boxDist(l1,ux,uy) : 0, s2 = l2 ? boxDist(l2,ux,uy) : 0;
+    const a = [x1+ux*s1, y1+uy*s1, x2-ux*s2, y2-uy*s2];
+    const ln = (p) => `<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${p[2].toFixed(1)}" y2="${p[3].toFixed(1)}"/>`;
+    if(order === 2 && cx != null){
+      let nx = -uy, ny = ux;
+      const mx = (x1+x2)/2, my = (y1+y2)/2;
+      if(nx*(cx-mx) + ny*(cy-my) < 0){ nx = -nx; ny = -ny; }
+      const segL = Math.hypot(a[2]-a[0], a[3]-a[1]), sh = l1||l2 ? 0.08 : 0.17;
+      const b = [a[0]+ux*segL*sh+nx*5, a[1]+uy*segL*sh+ny*5, a[2]-ux*segL*sh+nx*5, a[3]-uy*segL*sh+ny*5];
+      lines += ln(a) + ln(b);
+    } else if(order === 2){
+      const nx = -uy*2.6, ny = ux*2.6;
+      lines += ln([a[0]+nx,a[1]+ny,a[2]+nx,a[3]+ny]) + ln([a[0]-nx,a[1]-ny,a[2]-nx,a[3]-ny]);
+    } else lines += ln(a);
+  }
+  let labels = '';
+  atoms.forEach(([x,y,l]) => { if(l) labels += labelSVG(l, x, y); });
+  // R-group highlight box
+  let rx1=Infinity, ry1=Infinity, rx2=-Infinity, ry2=-Infinity;
+  rIdx.forEach(i => { const [x,y,l] = atoms[i]; const hw = l ? labelW(l)/2 : 1, hh = l ? 10 : 1;
+    rx1 = Math.min(rx1,x-hw); rx2 = Math.max(rx2,x+hw); ry1 = Math.min(ry1,y-hh); ry2 = Math.max(ry2,y+hh); });
+  const pad = 6;
+  const rbox = `<rect class="rbox" x="${(rx1-pad).toFixed(1)}" y="${(ry1-pad).toFixed(1)}" width="${(rx2-rx1+2*pad).toFixed(1)}" height="${(ry2-ry1+2*pad).toFixed(1)}" rx="2"/>`;
+  // viewBox
+  let x1=Infinity, y1=Infinity, x2=-Infinity, y2=-Infinity;
+  atoms.forEach(([x,y,l]) => { const hw = l ? labelW(l)/2 : 0; x1=Math.min(x1,x-hw); x2=Math.max(x2,x+hw); y1=Math.min(y1,y-12); y2=Math.max(y2,y+12); });
+  x1 = Math.min(x1, rx1-pad); x2 = Math.max(x2, rx2+pad);
+  const P = 8, vw = x2-x1+2*P, vh = y2-y1+2*P;
+  return `<svg class="mol" viewBox="${(x1-P).toFixed(1)} ${(y1-P).toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}" style="max-width:${(vw*scale).toFixed(0)}px" role="img" aria-label="Amino acid structure">${rbox}${lines}${labels}</svg>`;
+}
+
+/* ---------------- Lec 1 question bank ---------------- */
+const TOPICS = {
+  big:   'Metabolism big picture',
+  mol:   'Biomolecules and peptides',
+  prot:  'Protein structure and cofactors',
+  enz:   'Enzymes',
+  course:'Course logistics'
+};
+// mc: first option is correct (shuffled at runtime). tf: a = true/false. self: think, reveal, self-grade.
+const LEC = [
+ {id:'b1', topic:'big', item:'Info-flow hierarchy', type:'mc', q:'On the "Remembering biology" slide, metabolites sit between which two levels?',
+  o:['Proteins and cells','DNA and RNA','RNA and proteins','Tissues and organisms'],
+  ex:'DNA → RNA → proteins → metabolites → cell → tissue → organism → ecosystem.'},
+ {id:'b2', topic:'big', item:'Iterated vs non-iterated', type:'tf', q:'DNA, RNA and proteins are built from repeated (iterated) monomers, while small biomolecules like acetyl-CoA are not.', a:true,
+  ex:'Letters → words, nucleotides → DNA, amino acids → proteins are ordered linear sequences. Small biomolecules are one-off structures.'},
+ {id:'b3', topic:'big', item:'Functional groups', type:'mc', q:'Small biomolecules have non-iterated structures, but what do they share?',
+  o:['Common functional groups','A common backbone','The same set of 20 monomers','A fixed N-to-C direction'],
+  ex:'Acetyl-CoA is the example: thioester, amido, hydroxyl, methyl, phosphoanhydride, phosphoryl, imidazole and amino groups.'},
+ {id:'b4', topic:'big', item:'Acetyl-CoA thioester', type:'mc', q:'In acetyl-CoA, what kind of bond holds the acetyl group onto coenzyme A?',
+  o:['Thioester','Phosphoanhydride','Amido (amide)','Glycosidic'],
+  ex:'CH₃–C(=O)–S–: a carbonyl bonded to sulfur is a thioester.'},
+ {id:'b5', topic:'big', item:'Acetyl-CoA groups', type:'self', q:'Name at least four functional groups highlighted on acetyl-CoA.',
+  ans:'Thioester, amido (two of them), hydroxyl, methyl (two), phosphoanhydride, phosphoryl, imidazole, amino.'},
+ {id:'b6', topic:'big', item:'Metabolic pathway', type:'mc', q:'In a generic pathway A → B → C → D → E → F, what does each arrow stand for?',
+  o:['A reaction catalyzed by its own enzyme','A gene being transcribed','A molecule crossing a membrane','A spontaneous, uncatalyzed step'],
+  ex:'Enzyme 1 turns A into B, enzyme 2 turns B into C, and so on.'},
+ {id:'b7', topic:'big', item:'Why study metabolism', type:'self', q:'Give three reasons from the slide for studying metabolism.',
+  ans:'It underlies every life process; obesity; adult-onset (type 2) diabetes; exercise; ageing, cancer and other diseases; biofuels for alternative energy.'},
+ {id:'b8', topic:'big', item:'Catabolism', type:'mc', q:'Catabolic pathways are…',
+  o:['Exergonic: they break fuels down to simple products and make ATP','Endergonic: they build complex molecules using ATP','Exergonic: they build complex molecules','Endergonic: they break fuels down'],
+  ex:'Stored nutrients, food and photons are broken down to CO₂, NH₃ and H₂O; the energy released makes ATP from ADP + Pᵢ.'},
+ {id:'b9', topic:'big', item:'Anabolism', type:'mc', q:'Anabolic pathways are…',
+  o:['Endergonic: they use ATP to build complex biomolecules and do work','Exergonic: they release energy as ATP','Exergonic: they break down stored nutrients','Endergonic: they produce CO₂ and H₂O'],
+  ex:'Simple precursors are built into complex biomolecules, and ATP also powers mechanical and osmotic work.'},
+ {id:'b10', topic:'big', item:'ATP coupling', type:'mc', q:'What couples catabolism to anabolism on the U-shaped diagram?',
+  o:['The ATP ⇄ ADP + Pᵢ cycle','Glucose','Oxygen','DNA replication'],
+  ex:'Catabolism charges ADP into ATP; anabolism spends ATP back to ADP + Pᵢ.'},
+ {id:'b11', topic:'big', item:'Kipchoge vs bodybuilder', type:'tf', q:'On the slide, the marathoner (Kipchoge) represents anabolism and the bodybuilder represents catabolism.', a:false,
+  ex:'It\'s the other way round: the runner burning fuel is catabolism, the bodybuilder building muscle is anabolism.'},
+ {id:'b12', topic:'big', item:'Muscle–liver lactate', type:'mc', q:'Working muscle turns glycogen into lactate for quick ATP. What does the liver do with that lactate?',
+  o:['Spends ATP to turn it back into glucose (gluconeogenesis)','Stores it as fat','Burns it to make ATP for the liver','Excretes it in urine'],
+  ex:'Blood lactate goes to the liver, which makes glucose during recovery; blood glucose returns to muscle to rebuild glycogen.'},
+ {id:'b13', topic:'big', item:'Levels of thinking', type:'mc', q:'The muscle and liver swapping lactate and glucose shows metabolism at which level?',
+  o:['Between organs in one organism','A single molecule','Inside one organelle','The whole ecosystem'],
+  ex:'The slides zoom out: a molecule (alanine), a cell, organs (muscle ↔ liver), then the planet (photosynthesis ↔ respiration).'},
+ {id:'b14', topic:'big', item:'Photosynthesis–respiration', type:'mc', q:'At the ecosystem level, photosynthesis supplies what that cellular respiration then uses?',
+  o:['Reduced fuels and O₂','CO₂ and H₂O','ATP and NADH','Nitrogen and phosphate'],
+  ex:'Photosynthesis makes reduced fuels + O₂; respiration burns them back to CO₂, which photosynthesis fixes again.'},
+ {id:'b15', topic:'big', item:'Metabolomics', type:'mc', q:'Metabolomics is…',
+  o:['Measuring the full set of metabolites to study metabolism as a system','Sequencing all the genes in a genome','Mapping every protein–protein interaction','Studying a single enzyme in isolation'],
+  ex:'The slides show Chris Newgard\'s lab at the Duke Molecular Physiology Institute, with mass spectrometry (GC/MS) equipment.'},
+ {id:'b16', topic:'big', item:'Metabolism evolution', type:'self', q:'"How did (and does) metabolism evolve?" lists four issues. Name them.',
+  ans:'1) The chicken-and-egg problem in the origin of metabolism. 2) Multiple (non-essential) intermediates between essential molecules. 3) Organism-specific metabolism. 4) Regulatory connections and strategies.'},
+
+ {id:'m1', topic:'mol', item:'Alpha carbon', type:'mc', q:'In the generic amino acid, the carbon bonded to the amino group, carboxyl group, H and R is called the…',
+  o:['α (alpha) carbon','β carbon','Carbonyl carbon','Anomeric carbon'],
+  ex:'Every amino acid shares this backbone; only R changes.'},
+ {id:'m2', topic:'mol', item:'Zwitterion', type:'mc', q:'As drawn on the slide (near neutral pH), the generic amino acid carries charges on…',
+  o:['The amino group (NH₃⁺) and the carboxyl group (COO⁻)','Only the R group','The α carbon','Only the carboxyl group'],
+  ex:'H₃N⁺ on one side, COO⁻ on top: a zwitterion.'},
+ {id:'m3', topic:'mol', item:'L amino acids', type:'tf', q:'The amino acids that make up proteins are L amino acids.', a:true,
+  ex:'The slide labels the generic structure "an L amino acid."'},
+ {id:'m4', topic:'mol', item:'Peptide bond water', type:'mc', q:'Making a peptide bond between two amino acids…',
+  o:['Releases a water (condensation)','Uses up a water (hydrolysis)','Releases CO₂','Requires a disulfide'],
+  ex:'The –OH from one carboxyl and an H from the next amino group leave as H₂O. Hydrolysis adds water back to break the bond.'},
+ {id:'m5', topic:'mol', item:'Peptide bond atoms', type:'mc', q:'A peptide bond joins…',
+  o:['The carboxyl carbon of one amino acid to the amino nitrogen of the next','Two R groups','Two α carbons directly','The amino nitrogens of two amino acids'],
+  ex:'The shaded C(=O)–N(H) unit is the peptide (amide) bond.'},
+ {id:'m6', topic:'mol', item:'N and C termini', type:'mc', q:'A polypeptide has distinct ends. Which end has the free NH₃⁺?',
+  o:['The N-terminus (amino-terminal end)','The C-terminus','Both ends','Neither; both are in peptide bonds'],
+  ex:'Sequences are written N → C, left to right.'},
+ {id:'m7', topic:'mol', item:'Five-residue peptide', type:'self', q:'The five-residue peptide on the slide has R groups CH₂OH, H, CH₂-phenol, CH₃, then CH₂CH(CH₃)₂. Write it in one-letter code.',
+  ans:'SGYAL (Ser-Gly-Tyr-Ala-Leu), N-terminus to C-terminus.'},
+ {id:'m8', topic:'mol', item:'Chemical independence', type:'mc', q:'"Chemical independence of R groups" means…',
+  o:['Each side chain keeps its own chemistry once it\'s in a chain (Glu still has COO⁻, Lys still has NH₃⁺)','R groups react with each other to form the backbone','R groups lose their charge in a polypeptide','Only the terminal R groups are reactive'],
+  ex:'The backbone links through the α-amino and α-carboxyl groups, so the side chains are left free.'},
+ {id:'m9', topic:'mol', item:'Aspartame', type:'mc', q:'Aspartame (Equal) is…',
+  o:['L-aspartyl-L-phenylalanine methyl ester','L-phenylalanyl-L-aspartate','A glutamate–tyrosine dipeptide','A five-residue neuropeptide'],
+  ex:'A dipeptide: Asp joined to Phe, with Phe\'s carboxyl capped as a methyl ester (–OCH₃).'},
+ {id:'m10', topic:'mol', item:'Met-enkephalin', type:'mc', q:'Met-enkephalin, "your own morphine," has which sequence?',
+  o:['Tyr-Gly-Gly-Phe-Met','Met-Phe-Gly-Gly-Tyr','Tyr-Gly-Phe-Met-Gly','Trp-Gly-Gly-Phe-Met'],
+  ex:'YGGFM. It\'s a neuropeptide (an endogenous opioid) and ends in Met, hence the name.'},
+ {id:'m11', topic:'mol', item:'Met-enkephalin code', type:'self', q:'Write met-enkephalin in one-letter code.', ans:'YGGFM'},
+
+ {id:'p1', topic:'prot', item:'Alpha helix H-bonds', type:'mc', q:'What holds an α helix together?',
+  o:['H-bonds between backbone C=O and N–H groups along the same chain','Disulfide bonds between cysteines','Ionic bonds between R groups','H-bonds between neighboring strands'],
+  ex:'Backbone carbonyls bond to N–H groups a few residues along, and the R groups point outward.'},
+ {id:'p2', topic:'prot', item:'Alpha helix turn', type:'mc', q:'How many residues per turn of an α helix (per 5.4 Å)?',
+  o:['3.6','2.0','4.5','10'],
+  ex:'The slide marks 5.4 Å = 3.6 residues for one turn.'},
+ {id:'p3', topic:'prot', item:'Beta sheet', type:'mc', q:'In a β sheet…',
+  o:['H-bonds form between backbones of neighboring strands, and R groups alternate above and below the sheet','H-bonds form within one coiled strand','R groups all point to the same side','Strands are held only by disulfides'],
+  ex:'The side view shows the pleat with R groups (purple) sticking up and down alternately.'},
+ {id:'p4', topic:'prot', item:'Beta structures', type:'mc', q:'Which two common β structures were shown?',
+  o:['β barrel and twisted β sheet','β helix and β coil','Triple helix and β turn','Coiled coil and β loop'],
+  ex:'Sheets can curl around into a barrel or twist.'},
+ {id:'p5', topic:'prot', item:'Levels of structure', type:'self', q:'Define the four levels of protein structure.',
+  ans:'Primary: amino acid sequence. Secondary: local backbone shapes like α helix and β sheet. Tertiary: the full 3D fold of one polypeptide. Quaternary: multiple subunits assembled together.'},
+ {id:'p6', topic:'prot', item:'Quaternary structure', type:'mc', q:'Quaternary structure is…',
+  o:['The assembly of multiple polypeptide subunits','The 3D fold of one chain','The amino acid sequence','A single α helix'],
+  ex:'The slide shows two-colored subunits packed together (like hemoglobin).'},
+ {id:'p7', topic:'prot', item:'Secondary structure', type:'mc', q:'An α helix is an example of which level of structure?',
+  o:['Secondary','Primary','Tertiary','Quaternary'],
+  ex:'Secondary structure = local, repeating backbone patterns.'},
+ {id:'p8', topic:'prot', item:'Cofactor', type:'mc', q:'A cofactor is…',
+  o:['A molecular entity in addition to the polypeptide\'s amino acids: an ion or a discrete molecule','Any amino acid with a charged R group','A second polypeptide chain','A gene that controls an enzyme'],
+  ex:'Heme is the example: a discrete molecule holding an iron ion.'},
+ {id:'p9', topic:'prot', item:'Heme iron', type:'mc', q:'What sits at the center of heme?',
+  o:['Iron (Fe), held by four nitrogens','Magnesium, held by four oxygens','Zinc, held by cysteines','Copper, held by histidines'],
+  ex:'The porphyrin ring\'s four N atoms grip Fe in a flat square.'},
+ {id:'p10', topic:'prot', item:'Heme at home', type:'tf', q:'In the "heme at home" slide (myoglobin), the heme sits in a pocket formed by α helices.', a:true,
+  ex:'The helices are labeled A through H, with the heme tucked between E and F.'},
+
+ {id:'e1', topic:'enz', item:'Enzyme definition', type:'self', q:'Give the lecture\'s definition of an enzyme (four parts).',
+  ans:'Biological catalysts; proteins (for the whopping majority); encoded by genes; which links them to diseases, alleles and isozymes.'},
+ {id:'e2', topic:'enz', item:'Enzymes are proteins?', type:'tf', q:'Every enzyme is a protein.', a:false,
+  ex:'The "whopping majority" are, but not all. Some catalysts are RNA (ribozymes).'},
+ {id:'e3', topic:'enz', item:'Enzymes and genes', type:'mc', q:'Because enzymes are encoded by genes, the lecture connects them to…',
+  o:['Diseases, alleles and isozymes','Only dietary vitamins','Carbohydrate storage','Membrane transport only'],
+  ex:'A mutant allele can mean a broken enzyme (disease); isozymes are different gene products doing the same reaction.'},
+ {id:'e4', topic:'enz', item:'Enzymes key to metabolism', type:'mc', q:'Why are enzymes called "the keys to metabolism"?',
+  o:['Every step on the metabolic map is a reaction an enzyme catalyzes','They are the main fuel cells burn','They store genetic information','They make up cell membranes'],
+  ex:'Each dot-to-dot line on the giant pathway map is an enzyme-catalyzed step.'},
+ {id:'e5', topic:'enz', item:'Substrate binding', type:'mc', q:'The last slides show a small molecule (red) moving from outside the enzyme into a groove on its surface. What is that groove?',
+  o:['The active site, where substrate binds and reacts','The N-terminus','A β barrel pore','The heme pocket'],
+  ex:'Binding the substrate in the active site is where catalysis begins (more in lecture 2).'},
+
+ {id:'c1', topic:'course', item:'Textbook', type:'tf', q:'The Lehninger textbook is required for the class.', a:false,
+  ex:'It\'s optional extra reading. The posted PDFs on Canvas are the required readings.'},
+ {id:'c2', topic:'course', item:'Weekly quiz', type:'mc', q:'The weekly Canvas quiz is posted by Friday noon and due…',
+  o:['Monday midnight, with two tries','Sunday noon, one try','Friday midnight, two tries','Tuesday before class'],
+  ex:'Open book, can work with someone, and taking it twice is a built-in study boost.'},
+ {id:'c3', topic:'course', item:'ASAW', type:'mc', q:'ASAW (A Structure A Week) must be…',
+  o:['Hand drawn and uploaded to Gradescope (graded for submission)','Typed in ChemDraw and emailed','Done in discussion section','Submitted on Canvas as a quiz'],
+  ex:'Posted Friday noon, due Monday midnight.'},
+ {id:'c4', topic:'course', item:'Midterm dates', type:'mc', q:'When are the two midterms?',
+  o:['Tue 10/27 and Tue 11/24','Thu 10/22 and Thu 11/19','Tue 10/20 and Tue 11/17','Thu 10/29 and Tue 12/1'],
+  ex:'The final is Dec 9, 11:30–2:30.'},
+ {id:'c5', topic:'course', item:'Points', type:'mc', q:'Which is worth the most points?',
+  o:['Final (300 points, 30%)','Midterm 1 (200 points)','Weekly quizzes (160 points)','Attendance (100 points)'],
+  ex:'Midterms are 200 each, quizzes 160, attendance 100, ASAW 40. Total 1000.'},
+ {id:'c6', topic:'course', item:'Office hours', type:'mc', q:'When are Randy\'s office hours?',
+  o:['Thursday 1–2 pm, 2130 Pacific Hall','Tuesday 1–2 pm, York Hall','Friday noon on Zoom','Monday 11–12, Pacific Hall'],
+  ex:'For email, start the subject line with "BIBC 102".'}
+];
+const LEC_BY_ID = Object.fromEntries(LEC.map(q=>[q.id,q]));
+
+/* ---------------- progress, history, logging ---------------- */
+let mastery = store.get('mastery', {});         // key "aa:Glycine" / "lec:b1" -> 0..5
+let history = store.get('history', []);         // [{s,i,r,t}]
+let pending = store.get('pending', []);         // rows waiting to be sent
+let endpoint = store.get('endpoint', '') || DEFAULT_ENDPOINT;
+let remote = null, remoteAt = 0;                // rows pulled from the sheet
+
+const lvl = k => mastery[k] || 0;
+function bump(k, ok){ mastery[k] = ok ? Math.min(5, lvl(k)+1) : Math.max(0, lvl(k)-2); store.set('mastery', mastery); }
+
+function logRow(row){
+  history.push({s:row.section, i:row.item, r:row.result==='Right'?1:0, t:Date.now()});
+  if(history.length > 4000) history = history.slice(-4000);
+  store.set('history', history);
+  if(!endpoint) return;
+  pending.push(row); store.set('pending', pending);
+  flush();
+}
+let flushing = false;
+async function flush(){
+  if(!endpoint || flushing || !pending.length) return;
+  flushing = true;
+  const batch = pending.slice();
+  try{
+    await fetch(endpoint, {method:'POST', mode:'no-cors', keepalive:true,
+      headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({rows:batch})});
+    pending = pending.slice(batch.length); store.set('pending', pending);
+  }catch(e){ /* offline: rows stay queued and retry later */ }
+  flushing = false;
+  if(pending.length) setTimeout(flush, 4000);
+}
+async function pullRemote(){
+  if(!endpoint) return;
+  const ctl = new AbortController(); const tm = setTimeout(()=>ctl.abort(), 8000);
+  try{
+    const res = await fetch(endpoint, {signal:ctl.signal});
+    const data = await res.json();
+    if(Array.isArray(data.rows)){
+      remote = data.rows.map(r=>({s:r.section, i:r.item, r:r.result==='Right'?1:0, t:+r.ts}));
+      remoteAt = Date.now();
+      if(view === 'home') renderHome();
+    }
+  }catch(e){ /* sheet history is optional */ }
+  clearTimeout(tm);
+}
+function attemptRows(){
+  const base = remote ? remote.concat(history.filter(h=>h.t > remoteAt)) : history;
+  return base.filter(r => r.s === 'Amino acids' || r.s === 'Lec 1');
+}
+function weakSpots(limit=6){
+  const by = {};
+  for(const r of attemptRows()){ const k = r.s+'|'+r.i; (by[k] = by[k] || []).push(r); }
+  const out = [];
+  for(const k in by){
+    const rows = by[k].sort((a,b)=>a.t-b.t).slice(-6);
+    const miss = rows.filter(r=>!r.r).length;
+    if(!miss) continue;
+    const lastWrong = !rows[rows.length-1].r;
+    const [s,i] = k.split('|');
+    out.push({s, i, miss, n:rows.length, lastWrong, score: miss + (lastWrong?1.5:0)});
+  }
+  return out.sort((a,b)=>b.score-a.score).slice(0, limit);
+}
+function weakBonus(section, item){
+  const w = weakSpots(40).find(x=>x.s===section && x.i===item);
+  return w ? w.score : 0;
+}
+
+/* ---------------- views ---------------- */
+let view = 'home';
+const app = $('#app');
+let keyHandler = null;
+document.addEventListener('keydown', e => {
+  if($('#settings').open) return;
+  if(keyHandler) keyHandler(e);
+});
+function go(fn){ keyHandler = null; window.scrollTo(0,0); fn(); }
+
+function renderHome(){
+  view = 'home';
+  const teaser = pick(AA);
+  const strip = AA.map(a => `<i title="${a.name}"><b style="--c:${CATS[a.cat].color};--o:${(lvl('aa:'+a.name)/5).toFixed(2)}"></b></i>`).join('');
+  const solid = AA.filter(a=>lvl('aa:'+a.name)>=4).length;
+  const topicRows = Object.keys(TOPICS).filter(t=>t!=='course').map(t => {
+    const qs = LEC.filter(q=>q.topic===t);
+    const pct = qs.reduce((s,q)=>s+lvl('lec:'+q.id),0)/(qs.length*5)*100;
+    return `<li><span>${TOPICS[t]}</span><span class="meter" aria-label="${pct.toFixed(0)}% mastered"><b style="width:${pct.toFixed(0)}%"></b></span></li>`;
+  }).join('');
+  const weak = weakSpots();
+  const weakHTML = weak.length
+    ? `<ul class="weak">${weak.map(w=>`<li><span><span class="w-item">${esc(w.i)}</span> <span class="muted small">${w.s==='Amino acids'?'amino acid':'Lec 1'}</span></span><span class="muted small">missed ${w.miss} of last ${w.n}</span></li>`).join('')}</ul>
+       <button class="btn" id="drillWeak">Drill these ${weak.length}</button>`
+    : `<p class="empty">Nothing to revise yet. Anything you miss shows up here${remote?' (pulled from your sheet)':''}, worst first.</p>`;
+  app.innerHTML = `
+    <header class="top">
+      <h1 class="title">Lec 1 drills<span>BIBC 102, Metabolic Biochemistry</span></h1>
+      <button class="sync" id="openSettings"><span class="dot ${endpoint?'on':''}"></span>${endpoint?'Logging to sheet':'Connect sheet'}</button>
+    </header>
+    <div class="doors">
+      <a class="door" href="#" id="goAA">
+        <h2>Amino acids</h2>
+        <span class="muted">Structure, name, three-letter, one-letter, category. All 20.</span>
+        <span class="mol-wrap">${drawAA(teaser, 1.1)}</span>
+        <span class="muted small" style="text-align:center">Name this one in your head on the way in.</span>
+        <span class="door-foot"><span class="strip" aria-hidden="true">${strip}</span><span class="small muted">${solid}/20 solid</span></span>
+      </a>
+      <a class="door" href="#" id="goLec">
+        <h2>Rest of Lec 1</h2>
+        <span class="muted">Quick checks on everything else in the slides.</span>
+        <ul class="topics">${topicRows}</ul>
+        <span class="door-foot"><span class="small muted">${LEC.filter(q=>q.topic!=='course').length} questions, plus optional course logistics</span></span>
+      </a>
+    </div>
+    <section class="sect">
+      <h3>Revise first</h3>
+      ${weakHTML}
+    </section>`;
+  $('#goAA').onclick = e => { e.preventDefault(); go(renderAASetup); };
+  $('#goLec').onclick = e => { e.preventDefault(); go(renderLecSetup); };
+  $('#openSettings').onclick = openSettings;
+  const dw = $('#drillWeak'); if(dw) dw.onclick = () => startWeakDrill(weak);
+}
+
+/* ---------- setup screens ---------- */
+let aaOpts = store.get('aaOpts', {mode:'mixed', len:20, focus:'all'});
+function renderAASetup(){
+  view = 'aaSetup';
+  const modes = [
+    ['mixed','Mixed drill','Tap or type answers, graded for you. Questions get harder as each amino acid sticks, and misses come back a few cards later.'],
+    ['recall','Recall cards','See a structure, say the name, both codes and the category in your head, then check and mark what you missed.'],
+    ['study','Study sheet','All 20 grouped by category. Hide the names and tap to test yourself.']
+  ];
+  const focusChips = [['all','All 20'],['weak','My weak ones'], ...CAT_ORDER.map(c=>[c, CATS[c].name])];
+  app.innerHTML = `
+    <button class="back" id="back">← Home</button>
+    <div class="setup">
+      <h2>Amino acids</h2>
+      <p class="muted">Pink boxes mark the R group, same as the slides.</p>
+      <div class="field"><span class="lab">How do you want to practice?</span>
+        <div class="modes">${modes.map(([k,t,d])=>`<button class="mode" data-mode="${k}" aria-pressed="${aaOpts.mode===k}"><span class="radio"></span><span><strong>${t}</strong><br><span class="muted small">${d}</span></span></button>`).join('')}</div>
+      </div>
+      <div class="field" id="lenField"><span class="lab">Questions</span>
+        <div class="chips">${[10,20,30,40].map(n=>`<button class="chip" data-len="${n}" aria-pressed="${aaOpts.len===n}">${n}</button>`).join('')}</div>
+      </div>
+      <div class="field" id="focusField"><span class="lab">Which ones</span>
+        <div class="chips">${focusChips.map(([k,t])=>`<button class="chip" data-focus="${k}" aria-pressed="${aaOpts.focus===k}">${CATS[k]?`<span class="sw" style="--c:${CATS[k].color}"></span>`:''}${t}</button>`).join('')}</div>
+      </div>
+      <div class="field"><button class="btn" id="start">Start</button></div>
+    </div>`;
+  const sync = () => {
+    store.set('aaOpts', aaOpts);
+    app.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.mode===aaOpts.mode));
+    app.querySelectorAll('[data-len]').forEach(b=>b.setAttribute('aria-pressed', +b.dataset.len===aaOpts.len));
+    app.querySelectorAll('[data-focus]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.focus===aaOpts.focus));
+    $('#lenField').hidden = $('#focusField').hidden = aaOpts.mode==='study';
+    $('#start').textContent = aaOpts.mode==='study' ? 'Open study sheet' : 'Start';
+  };
+  app.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{aaOpts.mode=b.dataset.mode;sync();});
+  app.querySelectorAll('[data-len]').forEach(b=>b.onclick=()=>{aaOpts.len=+b.dataset.len;sync();});
+  app.querySelectorAll('[data-focus]').forEach(b=>b.onclick=()=>{aaOpts.focus=b.dataset.focus;sync();});
+  $('#back').onclick = () => go(renderHome);
+  $('#start').onclick = () => {
+    if(aaOpts.mode==='study') return go(renderStudy);
+    let pool = AA.map((_,i)=>i);
+    if(aaOpts.focus==='weak'){
+      const w = weakSpots(40).filter(x=>x.s==='Amino acids').map(x=>AA.findIndex(a=>a.name===x.i)).filter(i=>i>=0);
+      const low = pool.filter(i=>lvl('aa:'+AA[i].name)<=1);
+      pool = [...new Set([...w, ...low])];
+      if(pool.length < 3) pool = AA.map((_,i)=>i);
+    } else if(CATS[aaOpts.focus]) pool = pool.filter(i=>AA[i].cat===aaOpts.focus);
+    startSession(buildAADeck(pool, aaOpts.len, aaOpts.mode));
+  };
+  sync();
+}
+
+let lecOpts = store.get('lecOpts', {topics:['big','mol','prot','enz'], len:15});
+function renderLecSetup(){
+  view = 'lecSetup';
+  app.innerHTML = `
+    <button class="back" id="back">← Home</button>
+    <div class="setup">
+      <h2>Rest of Lec 1</h2>
+      <p class="muted">Multiple choice and true/false are graded for you. Open questions: answer in your head, reveal, then say honestly if you got it.</p>
+      <div class="field"><span class="lab">Topics</span>
+        <div class="chips">${Object.entries(TOPICS).map(([k,t])=>`<button class="chip" data-topic="${k}" aria-pressed="${lecOpts.topics.includes(k)}">${t}</button>`).join('')}</div>
+      </div>
+      <div class="field"><span class="lab">Questions</span>
+        <div class="chips">${[10,15,25,'All'].map(n=>`<button class="chip" data-len="${n}" aria-pressed="${String(lecOpts.len)===String(n)}">${n}</button>`).join('')}</div>
+      </div>
+      <div class="field"><button class="btn" id="start">Start</button></div>
+    </div>`;
+  const sync = () => {
+    store.set('lecOpts', lecOpts);
+    app.querySelectorAll('[data-topic]').forEach(b=>b.setAttribute('aria-pressed', lecOpts.topics.includes(b.dataset.topic)));
+    app.querySelectorAll('[data-len]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.len)===String(lecOpts.len)));
+    $('#start').disabled = !lecOpts.topics.length;
+  };
+  app.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>{
+    const t=b.dataset.topic; lecOpts.topics = lecOpts.topics.includes(t) ? lecOpts.topics.filter(x=>x!==t) : [...lecOpts.topics, t]; sync(); });
+  app.querySelectorAll('[data-len]').forEach(b=>b.onclick=()=>{ lecOpts.len = b.dataset.len==='All' ? 'All' : +b.dataset.len; sync(); });
+  $('#back').onclick = () => go(renderHome);
+  $('#start').onclick = () => {
+    const qs = LEC.filter(q=>lecOpts.topics.includes(q.topic));
+    const n = lecOpts.len==='All' ? qs.length : Math.min(lecOpts.len, qs.length);
+    const picked = weightedSample(qs, n, q => Math.pow(6-lvl('lec:'+q.id),2) + 4*weakBonus('Lec 1', q.item));
+    startSession(picked.map(q=>({kind:'lec', id:q.id})));
+  };
+  sync();
+}
+
+function weightedSample(items, n, wfn){
+  const pool = items.map(x=>({x, w:Math.max(0.5, wfn(x))})); const out = [];
+  while(out.length < n && pool.length){
+    const tot = pool.reduce((s,p)=>s+p.w,0); let r = Math.random()*tot, k = 0;
+    while(k < pool.length-1 && (r -= pool[k].w) > 0) k++;
+    out.push(pool.splice(k,1)[0].x);
+  }
+  return out;
+}
+
+/* ---------- amino deck ---------- */
+const AA_TYPES = {
+  struct2name: 'Structure → name',
+  struct2nameT:'Structure → name (typed)',
+  struct2one:  'Structure → one-letter code',
+  struct2cat:  'Structure → category',
+  name2one:    'Name → one-letter code',
+  three2one:   'Three-letter → one-letter',
+  one2name:    'One-letter → name',
+  name2struct: 'Name → structure',
+  recall:      'Full recall'
+};
+function pickType(level, avoid){
+  const pool = level<=1 ? ['struct2name','struct2name','one2name','struct2cat','name2one']
+             : level<=3 ? ['struct2one','three2one','name2struct','struct2cat','struct2name','one2name']
+             :            ['struct2nameT','struct2one','name2struct','three2one','struct2cat'];
+  const p = pool.filter(t=>t!==avoid);
+  return pick(p.length ? p : pool);
+}
+function buildAADeck(pool, n, mode){
+  // weighted by low mastery + recent misses; every item at least once when n >= pool size
+  const w = i => Math.pow(6-lvl('aa:'+AA[i].name),2) + 4*weakBonus('Amino acids', AA[i].name);
+  let order = weightedSample(pool, Math.min(n, pool.length), w);
+  while(order.length < n){
+    const next = weightedSample(pool, 1, w)[0];
+    if(order.slice(-3).includes(next) && pool.length > 3) continue;
+    order.push(next);
+  }
+  let lastType = null;
+  return order.map(i => {
+    const type = mode==='recall' ? 'recall' : pickType(lvl('aa:'+AA[i].name), lastType);
+    lastType = type;
+    return {kind:'aa', i, type};
+  });
+}
+function distractors(aa, k=3){
+  const out = [];
+  const add = idx => { if(idx!=null && idx>=0 && AA[idx]!==aa && !out.includes(idx)) out.push(idx); };
+  shuffle([...aa.conf]).forEach(c=>add(byOne[c]));
+  shuffle(AA.map((a,i)=>i).filter(i=>AA[i].cat===aa.cat)).forEach(add);
+  shuffle(AA.map((a,i)=>i)).forEach(add);
+  return out.slice(0,k);
+}
+function nameDistractors(aa, k=3){
+  const out = [];
+  const add = idx => { if(idx!=null && AA[idx]!==aa && !out.includes(idx)) out.push(idx); };
+  shuffle([...(aa.lconf||'')]).forEach(c=>add(byOne[c]));
+  shuffle([...aa.conf]).forEach(c=>add(byOne[c]));
+  shuffle(AA.map((a,i)=>i)).forEach(add);
+  return out.slice(0,k);
+}
+function lev(a,b){
+  const m=a.length,n=b.length, d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);
+  for(let j=1;j<=n;j++) d[0][j]=j;
+  for(let i=1;i<=m;i++) for(let j=1;j<=n;j++) d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[m][n];
+}
+function matchName(input){
+  const s = input.trim().toLowerCase().replace(/[^a-z ]/g,'');
+  if(!s) return null;
+  let best = null, bestD = Infinity, tie = false;
+  AA.forEach((a,i) => {
+    for(const nm of [a.name.toLowerCase(), ...(a.alias||[])]){
+      const dd = lev(s, nm);
+      if(dd < bestD){ bestD = dd; best = i; tie = false; } else if(dd === bestD && best !== i) tie = true;
+    }
+  });
+  return (bestD <= 2 && !tie) ? best : null;
+}
+
+/* ---------- session engine ---------- */
+let S = null;
+function startSession(cards, opts={}){
+  S = {cards, i:0, log:[], reins:{}, streak:0, best:0, start:Date.now(),
+       id:new Date().toISOString().slice(0,16).replace('T',' ')+' #'+Math.random().toString(36).slice(2,6)};
+  view = 'game';
+  renderCard();
+}
+function startWeakDrill(weak){
+  const cards = [];
+  weak.forEach(w => {
+    if(w.s==='Amino acids'){
+      const i = AA.findIndex(a=>a.name===w.i); if(i<0) return;
+      cards.push({kind:'aa', i, type:'struct2name'}, {kind:'aa', i, type:pickType(2,'struct2name')});
+    } else {
+      LEC.filter(q=>q.item===w.i).forEach(q=>cards.push({kind:'lec', id:q.id}));
+    }
+  });
+  if(!cards.length) return;
+  startSession(shuffle(cards));
+}
+
+function header(){
+  const pct = S.i / S.cards.length * 100;
+  return `<div class="bar">
+    <button class="x" id="quit" aria-label="End session">✕</button>
+    <div class="track" role="progressbar" aria-valuenow="${S.i}" aria-valuemin="0" aria-valuemax="${S.cards.length}"><b style="width:${pct}%"></b></div>
+    <div class="streak" id="streak" title="Streak">${S.streak ? '🔥 '+S.streak : ''}</div>
+  </div>`;
+}
+function renderCard(){
+  if(S.i >= S.cards.length) return renderSummary();
+  const c = S.cards[S.i];
+  S.shownAt = Date.now(); S.answered = false;
+  if(c.kind==='aa') renderAACard(c); else renderLecCard(c);
+  $('#quit').onclick = () => { if(S.log.length) renderSummary(); else go(renderHome); };
+}
+function record({section, item, qtype, question, correct, answer, ok, key}){
+  if(S.answered) return; S.answered = true;
+  const seconds = Math.round((Date.now()-S.shownAt)/100)/10;
+  bump(key, ok);
+  S.log.push({section, item, ok, qtype});
+  if(ok){ S.streak++; S.best = Math.max(S.best, S.streak); } else S.streak = 0;
+  const st = $('#streak'); if(st){ st.textContent = S.streak ? '🔥 '+S.streak : ''; if(ok){ st.classList.remove('pop'); void st.offsetWidth; st.classList.add('pop'); } }
+  logRow({ts:Date.now(), section, item, question, correct, answer, result: ok?'Right':'Wrong', seconds, type:qtype, session:S.id});
+  if(!ok) reinsert(S.cards[S.i], item);
+}
+function reinsert(card, item){
+  const n = S.reins[item] || 0; if(n >= 2) return;
+  S.reins[item] = n+1;
+  const pos = Math.min(S.cards.length, S.i + 3 + Math.floor(Math.random()*2));
+  const copy = card.kind==='aa' ? {kind:'aa', i:card.i, type: card.type==='recall' ? 'recall' : pickType(1, card.type)} : {kind:'lec', id:card.id};
+  S.cards.splice(pos, 0, copy);
+}
+function next(){ S.i++; renderCard(); }
+
+/* ---------- amino card ---------- */
+function aaFacts(aa){
+  return `<dl class="facts">
+    <div><dt>Name</dt><dd>${aa.name}</dd></div><div><dt>Three-letter</dt><dd>${aa.three}</dd></div>
+    <div><dt>One-letter</dt><dd>${aa.one}</dd></div><div><dt>Category</dt><dd><span class="catpill" style="--c:${CATS[aa.cat].color}">${CATS[aa.cat].name}</span></dd></div>
+  </dl>`;
+}
+function aaTeach(aa, showStruct){
+  return `${showStruct?`<div class="molbox">${drawAA(aa,1)}</div>`:''}${aaFacts(aa)}
+    <p><strong>Look for:</strong> ${aa.look}</p><p><strong>Code:</strong> ${aa.code}</p>`;
+}
+function renderAACard(c){
+  const aa = AA[c.i], t = c.type, key = 'aa:'+aa.name;
+  const base = {section:'Amino acids', item:aa.name, qtype:AA_TYPES[t], key};
+  let prompt = '', body = '', question = '', correctText = '', struct = false;
+
+  if(['struct2name','struct2nameT','struct2one','struct2cat','recall'].includes(t)){ prompt = `<div class="molbox">${drawAA(aa)}</div>`; struct = true; }
+  if(t==='name2one' || t==='name2struct') prompt = `<div class="bigterm">${aa.name}</div>`;
+  if(t==='three2one') prompt = `<div class="bigterm code">${aa.three}</div>`;
+  if(t==='one2name') prompt = `<div class="bigterm code">${aa.one}</div>`;
+
+  const ask = {struct2name:'Which amino acid is this?', struct2nameT:'Type the name.', struct2one:'One-letter code?', struct2cat:'Which category?',
+    name2one:'One-letter code?', three2one:'One-letter code?', one2name:'Which amino acid has this code?', name2struct:'Pick its structure.',
+    recall:'Say all four in your head: name, three-letter, one-letter, category.'}[t];
+
+  let opts = null;
+  if(t==='struct2name' || t==='one2name'){
+    const ds = t==='one2name' ? nameDistractors(aa) : distractors(aa);
+    opts = shuffle([c.i, ...ds]).map(i=>({label:AA[i].name, ok:i===c.i}));
+    body = `<div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}"><span class="k">${k+1}</span><span>${o.label}</span></button>`).join('')}</div>`;
+    correctText = aa.name;
+  } else if(t==='struct2cat'){
+    opts = CAT_ORDER.map(cat=>({label:CATS[cat].name, ok:cat===aa.cat, cat}));
+    body = `<div class="opts cats">${opts.map((o,k)=>`<button class="opt" data-k="${k}"><span class="k">${k+1}</span><span><span class="sw" style="--c:${CATS[o.cat].color}"></span>${o.label}</span></button>`).join('')}</div>`;
+    correctText = CATS[aa.cat].name;
+  } else if(t==='name2struct'){
+    opts = shuffle([c.i, ...distractors(aa)]).map(i=>({label:AA[i].name, ok:i===c.i, i}));
+    body = `<div class="opts structs">${opts.map((o,k)=>`<button class="opt" data-k="${k}" aria-label="Option ${k+1}"><span class="k">${k+1}</span>${drawAA(AA[o.i],0.75)}</button>`).join('')}</div>`;
+    correctText = aa.name;
+  } else if(['struct2one','name2one','three2one'].includes(t)){
+    body = `<div class="answer-in"><input class="letter" id="ans" maxlength="1" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="One-letter code"></div>
+            <p class="muted small" style="text-align:center;margin-top:8px">Type the letter. It checks instantly.</p>`;
+    correctText = aa.one;
+  } else if(t==='struct2nameT'){
+    body = `<div class="answer-in"><input class="word" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Amino acid name" placeholder="name"><button class="btn" id="check">Check</button></div>
+            <p class="muted small" style="text-align:center;margin-top:8px">Small typos are fine.</p>`;
+    correctText = aa.name;
+  } else if(t==='recall'){
+    body = `<div class="actions"><span class="muted small"><kbd>Space</kbd> to reveal</span><button class="btn" id="reveal">Show answer</button></div><div id="rv"></div>`;
+  }
+  question = AA_TYPES[t] + (struct ? '' : ': '+(t==='three2one'?aa.three:t==='one2name'?aa.one:aa.name));
+
+  app.innerHTML = `${header()}<article class="card">
+      <div class="qlabel"><span>${ask}</span><span>${S.i+1}/${S.cards.length}</span></div>
+      ${prompt}${body}<div id="fb" aria-live="polite"></div></article>`;
+
+  const finish = (ok, answer) => {
+    record({...base, question, correct: t==='recall' ? `${aa.name} / ${aa.three} / ${aa.one} / ${CATS[aa.cat].name}` : correctText, answer, ok});
+    const fb = $('#fb');
+    if(ok){
+      fb.innerHTML = `<div class="fb good"><h4>Right.</h4>${t==='recall'?'':`<p>${aa.name}, ${aa.three}, ${aa.one}. ${CATS[aa.cat].name}.</p>`}</div>`;
+      const timer = setTimeout(next, t==='recall' ? 0 : 900);
+      keyHandler = e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); clearTimeout(timer); next(); } };
+    } else {
+      fb.innerHTML = `<div class="fb bad"><h4>${t==='recall'?'Logged.':'Not quite. It\'s '+correctText+'.'}</h4>${aaTeach(aa, !struct)}
+        <p class="muted small">You'll see ${aa.name} again in a few cards.</p></div>
+        <div class="actions"><span class="muted small"><kbd>Enter</kbd> to continue</span><button class="btn" id="nextBtn">Next</button></div>`;
+      $('#nextBtn').onclick = next; $('#nextBtn').focus({preventScroll:true});
+      keyHandler = e => { if(e.key==='Enter'){ e.preventDefault(); next(); } };
+      fb.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+  };
+
+  if(opts){
+    const btns = [...app.querySelectorAll('.opt')];
+    const choose = k => {
+      if(S.answered) return;
+      const o = opts[k];
+      btns.forEach((b,j)=>{ b.disabled = true; if(opts[j].ok) b.classList.add('right'); else if(j===k) b.classList.add('wrong'); else b.classList.add('dim'); });
+      finish(o.ok, o.label);
+    };
+    btns.forEach((b,k)=>b.onclick=()=>choose(k));
+    keyHandler = e => { const n = parseInt(e.key,10); if(n>=1 && n<=opts.length){ e.preventDefault(); choose(n-1); } };
+  }
+  if(['struct2one','name2one','three2one'].includes(t)){
+    const inp = $('#ans'); inp.focus({preventScroll:true});
+    inp.oninput = () => {
+      const v = inp.value.replace(/[^a-z]/gi,'').toUpperCase(); inp.value = v;
+      if(!v || S.answered) return;
+      const ok = v === aa.one; inp.classList.add(ok?'right':'wrong'); inp.disabled = true;
+      finish(ok, v);
+    };
+  }
+  if(t==='struct2nameT'){
+    const inp = $('#ans'); inp.focus({preventScroll:true});
+    const check = () => {
+      if(S.answered || !inp.value.trim()) return;
+      const m = matchName(inp.value); const ok = m === c.i;
+      inp.classList.add(ok?'right':'wrong'); inp.disabled = true; $('#check').disabled = true;
+      finish(ok, inp.value.trim());
+    };
+    $('#check').onclick = check;
+    inp.onkeydown = e => { if(e.key==='Enter'){ e.preventDefault(); e.stopPropagation(); check(); } };
+  }
+  if(t==='recall'){
+    const reveal = () => {
+      $('#reveal').parentElement.remove();
+      const parts = ['Name','3-letter','1-letter','Category']; const missed = new Set();
+      $('#rv').innerHTML = `<div class="reveal">${aaFacts(aa)}<p><strong>Look for:</strong> ${aa.look}</p><p><strong>Code:</strong> ${aa.code}</p>
+        <p class="muted small" style="margin-top:14px">Tap anything you missed (or press 1–4). Nothing tapped means you got it all.</p>
+        <div class="misschips">${parts.map((p,k)=>`<button class="chip" data-p="${k}" aria-pressed="false">${k+1}. ${p}</button>`).join('')}</div>
+        <div class="actions"><span class="muted small"><kbd>Enter</kbd> to continue</span><button class="btn good" id="done">Got it all</button></div></div>`;
+      const chips = [...app.querySelectorAll('[data-p]')];
+      const upd = () => { const d = $('#done'); d.textContent = missed.size ? `Log ${missed.size} missed` : 'Got it all'; d.className = 'btn ' + (missed.size ? 'bad' : 'good'); };
+      const tog = k => { missed.has(k) ? missed.delete(k) : missed.add(k); chips[k].setAttribute('aria-pressed', missed.has(k)); upd(); };
+      chips.forEach((ch,k)=>ch.onclick=()=>tog(k));
+      const done = () => {
+        const ok = missed.size === 0;
+        finish(ok, ok ? 'Got all four' : 'Missed: '+[...missed].sort().map(k=>parts[k]).join(', '));
+        $('#rv .actions')?.remove(); chips.forEach(ch=>ch.disabled=true);
+        if(!ok){ const fbx = app.querySelector('.fb.bad'); if(fbx){ fbx.querySelector('.molbox')?.remove(); fbx.querySelectorAll('.facts, p:not(.muted)').forEach(x=>x.remove()); } }
+      };
+      $('#done').onclick = done; $('#done').focus({preventScroll:true});
+      keyHandler = e => { const n = parseInt(e.key,10); if(n>=1&&n<=4){ e.preventDefault(); tog(n-1); } else if(e.key==='Enter'){ e.preventDefault(); done(); } };
+    };
+    $('#reveal').onclick = reveal;
+    keyHandler = e => { if(e.key===' '||e.key==='Enter'){ e.preventDefault(); reveal(); } };
+  }
+}
+
+/* ---------- Lec 1 card ---------- */
+function renderLecCard(c){
+  const q = LEC_BY_ID[c.id];
+  const base = {section:'Lec 1', item:q.item, qtype:{mc:'Multiple choice',tf:'True / false',self:'Recall (self-graded)'}[q.type], key:'lec:'+q.id, question:q.q};
+  let body = '', opts = null;
+  if(q.type==='mc'){
+    opts = shuffle(q.o.map((t,k)=>({label:t, ok:k===0})));
+  } else if(q.type==='tf'){
+    opts = [{label:'True', ok:q.a===true},{label:'False', ok:q.a===false}];
+  }
+  if(opts) body = `<div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}"><span class="k">${q.type==='tf'?o.label[0]:k+1}</span><span>${esc(o.label)}</span></button>`).join('')}</div>`;
+  else body = `<div class="actions"><span class="muted small">Answer in your head first. <kbd>Space</kbd> to reveal</span><button class="btn" id="reveal">Show answer</button></div><div id="rv"></div>`;
+
+  app.innerHTML = `${header()}<article class="card">
+    <div class="qlabel"><span>${TOPICS[q.topic]}</span><span>${S.i+1}/${S.cards.length}</span></div>
+    <p class="qtext">${esc(q.q)}</p>${body}<div id="fb" aria-live="polite"></div></article>`;
+
+  const correctText = q.type==='mc' ? q.o[0] : q.type==='tf' ? (q.a?'True':'False') : q.ans;
+  const showNext = () => {
+    const fb = $('#fb');
+    fb.insertAdjacentHTML('beforeend', `<div class="actions"><span class="muted small"><kbd>Enter</kbd> to continue</span><button class="btn" id="nextBtn">Next</button></div>`);
+    $('#nextBtn').onclick = next; $('#nextBtn').focus({preventScroll:true});
+    keyHandler = e => { if(e.key==='Enter'){ e.preventDefault(); next(); } };
+    fb.scrollIntoView({behavior:'smooth', block:'nearest'});
+  };
+  if(opts){
+    const btns = [...app.querySelectorAll('.opt')];
+    const choose = k => {
+      if(S.answered) return;
+      const o = opts[k];
+      btns.forEach((b,j)=>{ b.disabled = true; if(opts[j].ok) b.classList.add('right'); else if(j===k) b.classList.add('wrong'); else b.classList.add('dim'); });
+      record({...base, correct:correctText, answer:o.label, ok:o.ok});
+      $('#fb').innerHTML = `<div class="fb ${o.ok?'good':'bad'}"><h4>${o.ok?'Right.':'Not quite.'}</h4>${o.ok?'':`<p><strong>Answer:</strong> ${esc(correctText)}</p>`}${q.ex?`<p>${esc(q.ex)}</p>`:''}${o.ok?'':'<p class="muted small">This one comes back in a few cards.</p>'}</div>`;
+      showNext();
+    };
+    btns.forEach((b,k)=>b.onclick=()=>choose(k));
+    keyHandler = e => {
+      const key = e.key.toLowerCase();
+      if(q.type==='tf' && (key==='t'||key==='f')){ e.preventDefault(); return choose(key==='t'?0:1); }
+      const n = parseInt(e.key,10); if(n>=1 && n<=opts.length){ e.preventDefault(); choose(n-1); }
+    };
+  } else {
+    const reveal = () => {
+      $('#reveal').parentElement.remove();
+      $('#rv').innerHTML = `<div class="reveal"><p class="answerbox">${esc(q.ans)}</p>
+        <div class="actions"><span class="muted small"><kbd>1</kbd> missed <kbd>2</kbd> got it</span>
+        <span class="row"><button class="btn bad" id="miss">Missed it</button><button class="btn good" id="got">Got it</button></span></div></div>`;
+      const grade = ok => { record({...base, correct:q.ans, answer: ok?'Self-graded: got it':'Self-graded: missed', ok}); if(ok) next(); else {
+        $('#rv').querySelector('.actions').remove();
+        $('#fb').innerHTML = `<div class="fb bad"><h4>Logged as missed.</h4><p class="muted small">Coming back in a few cards.</p></div>`; showNext(); } };
+      $('#miss').onclick = () => grade(false); $('#got').onclick = () => grade(true);
+      keyHandler = e => { if(e.key==='1'){ e.preventDefault(); grade(false); } else if(e.key==='2'){ e.preventDefault(); grade(true); } };
+    };
+    $('#reveal').onclick = reveal;
+    keyHandler = e => { if(e.key===' '||e.key==='Enter'){ e.preventDefault(); reveal(); } };
+  }
+}
+
+/* ---------- summary ---------- */
+function renderSummary(){
+  view = 'summary'; keyHandler = null;
+  const n = S.log.length, right = S.log.filter(l=>l.ok).length;
+  const mins = Math.max(1, Math.round((Date.now()-S.start)/60000));
+  const missMap = {};
+  S.log.filter(l=>!l.ok).forEach(l => { const k = l.section+'|'+l.item; missMap[k] = (missMap[k]||0)+1; });
+  const misses = Object.entries(missMap).sort((a,b)=>b[1]-a[1]);
+  const pct = n ? Math.round(right/n*100) : 0;
+  const line = !n ? 'No answers this time.' : pct===100 ? 'Clean sweep. The scheduler will push harder question types next time.'
+    : pct>=80 ? 'Solid. Hit the misses once more while they\'re fresh.' : 'Good reps. Misses are where the learning happens, so drill them now.';
+  app.innerHTML = `
+    <div class="setup">
+      <p class="score">${right}/${n}<small>${pct}%</small></p>
+      <p style="margin-top:12px">${line}</p>
+      <p class="muted small" style="margin-top:6px">${mins} min, best streak ${S.best}. ${endpoint ? 'Every answer was logged to your sheet.' : 'Saved on this device only. Connect your sheet from the home screen to log answers.'}</p>
+      ${misses.length ? `<div class="sect"><h3>Missed this session</h3><ul class="weak">${misses.map(([k,c])=>{const [s,i]=k.split('|');return `<li><span><span class="w-item">${esc(i)}</span> <span class="muted small">${s==='Amino acids'?'amino acid':'Lec 1'}</span></span><span class="muted small">${c}×</span></li>`;}).join('')}</ul></div>` : ''}
+      <div class="row" style="margin-top:24px">
+        ${misses.length ? '<button class="btn" id="again">Drill the misses</button>' : ''}
+        <button class="btn ghost" id="home">Home</button>
+      </div>
+    </div>`;
+  const ag = $('#again');
+  if(ag) ag.onclick = () => startWeakDrill(misses.map(([k])=>{ const [s,i]=k.split('|'); return {s,i}; }));
+  $('#home').onclick = () => go(renderHome);
+  keyHandler = e => { if(e.key==='Enter'){ e.preventDefault(); (ag||$('#home')).click(); } };
+}
+
+/* ---------- study sheet ---------- */
+function renderStudy(){
+  view = 'study';
+  let covered = store.get('covered', false);
+  app.innerHTML = `
+    <button class="back" id="back">← Amino acids</button>
+    <div class="setup">
+      <h2>Study sheet</h2>
+      <div class="row" style="justify-content:space-between;margin-top:6px">
+        <p class="muted">Same groups as the slide. Tap a card to peek.</p>
+        <label class="toggle"><input type="checkbox" id="cover" ${covered?'checked':''}> Hide names</label>
+      </div>
+      ${CAT_ORDER.map(cat => `<section class="catgroup" style="--c:${CATS[cat].color}"><h3>${CATS[cat].name}</h3>
+        <div class="tiles">${AA.filter(a=>a.cat===cat).map(a=>`<button class="tile ${covered?'covered':''}">${drawAA(a,0.8)}<span class="nm">${a.name}</span><span class="cd">${a.three} &nbsp;${a.one}</span></button>`).join('')}</div></section>`).join('')}
+      <div class="sect"><button class="btn" id="drill">Start a mixed drill</button></div>
+    </div>`;
+  $('#back').onclick = () => go(renderAASetup);
+  $('#cover').onchange = e => { covered = e.target.checked; store.set('covered', covered); app.querySelectorAll('.tile').forEach(t=>t.classList.toggle('covered', covered)); };
+  app.querySelectorAll('.tile').forEach(t => t.onclick = () => { if(covered) t.classList.toggle('covered'); });
+  $('#drill').onclick = () => { aaOpts.mode='mixed'; store.set('aaOpts', aaOpts); startSession(buildAADeck(AA.map((_,i)=>i), aaOpts.len, 'mixed')); };
+}
+
+/* ---------- settings ---------- */
+function openSettings(){
+  $('#endpoint').value = endpoint; $('#setStatus').textContent = '';
+  $('#settings').showModal();
+}
+$('#closeSettings').onclick = () => { $('#settings').close(); if(view==='home') renderHome(); };
+$('#saveEndpoint').onclick = async () => {
+  const v = $('#endpoint').value.trim();
+  if(v && !/^https:\/\/script\.google\.com\/.+\/exec$/.test(v)){ $('#setStatus').textContent = 'That doesn\'t look like a web app URL. It should start with https://script.google.com/ and end with /exec.'; return; }
+  endpoint = v; store.set('endpoint', v);
+  if(!v){ $('#setStatus').textContent = 'Logging turned off. Answers save on this device only.'; return; }
+  $('#setStatus').textContent = 'Sending a test row…';
+  try{
+    await fetch(v, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({rows:[{ts:Date.now(), section:'Setup', item:'Connection test', question:'Test row from the drill site', correct:'', answer:'', result:'Test', seconds:0, type:'Setup', session:'setup'}]})});
+    $('#setStatus').textContent = 'Sent. Check the Log tab in your sheet for a "Connection test" row.';
+    flush(); pullRemote();
+  }catch(e){ $('#setStatus').textContent = 'Couldn\'t reach that URL. Check you\'re online and the web app is deployed with access set to "Anyone".'; }
+};
+$('#resetAll').onclick = () => {
+  if(!confirm('Reset mastery and local history on this device?')) return;
+  mastery = {}; history = []; store.set('mastery', mastery); store.set('history', history);
+  $('#settings').close(); go(renderHome);
+};
+$('#settings').addEventListener('close', () => { if(view==='home') renderHome(); });
+
+/* ---------- boot ---------- */
+renderHome();
+flush();
+pullRemote();
+window.addEventListener('online', flush);
+</script>
+</body>
+</html>
